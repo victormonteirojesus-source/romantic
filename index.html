@@ -122,6 +122,7 @@
             font-weight: 700;
             background: linear-gradient(to right, var(--text-main), var(--accent-rose));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
             line-height: 1.2;
@@ -134,6 +135,14 @@
             font-weight: 300;
             letter-spacing: 0.05em;
             margin-bottom: 3rem;
+        }
+
+        .hero-text {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--text-secondary);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
         }
 
         /* ANIMAÇÃO CORAÇÃO */
@@ -368,7 +377,12 @@
             <div class="pulsing-heart">❤️</div>
         </section>
 
-        <!-- 2. SEÇÃO DE MÚSICA (Spotify) -->
+        <!-- 2. TEXTO -->
+        <section id="hero" class="section fade-in">
+            <p class="hero-text" id="couple-date">Te amo muuuuuito!❤️🐮</p>
+        </section>
+
+        <!-- 3. SEÇÃO DE MÚSICA (Spotify) -->
         <section id="music" class="section fade-in">
             <h2 class="section-title">Nossa música 🎵</h2>
             <div class="spotify-container">
@@ -380,7 +394,7 @@
             </div>
         </section>
 
-        <!-- 3. SEÇÃO DE DECLARAÇÃO -->
+        <!-- 4. SEÇÃO DE DECLARAÇÃO -->
         <section id="declaration" class="section fade-in">
             <h2 class="section-title">Minha declaração ❤️</h2>
             <div class="declaration-card">
@@ -393,7 +407,7 @@
             </div>
         </section>
 
-        <!-- 4. CONTADOR DE TEMPO JUNTOS -->
+        <!-- 5. CONTADOR DE TEMPO JUNTOS -->
         <section id="counter" class="section fade-in">
             <h2 class="section-title">Nosso tempo</h2>
             <p class="counter-intro">Estamos juntos há</p>
@@ -417,7 +431,7 @@
             </div>
         </section>
 
-        <!-- 5. GALERIA DE MOMENTOS -->
+        <!-- 6. GALERIA DE MOMENTOS -->
         <section id="gallery" class="section fade-in">
             <h2 class="section-title">Nossos momentos 📸</h2>
             <div class="gallery-grid">
@@ -437,7 +451,7 @@
             </div>
         </section>
 
-        <!-- 6. RODAPÉ -->
+        <!-- 7. RODAPÉ -->
         <footer class="footer fade-in">
             <p class="footer-text"><i>Feito com <span class="pulsing-heart small">❤️</span> especialmente para você</i>
             </p>
