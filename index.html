@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Você ❤️</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Paleta Romântica Escura e Elegante */
+            --bg-color: #0d0608;
+            --text-main: #fcfcfc;
+            --text-secondary: #e6c5cc;
+            --accent-wine: #721626;
+            --accent-rose: #d68798;
+            --accent-glow: rgba(214, 135, 152, 0.4);
+
+            /* Tipografia */
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+
+            /* Espaçamentos e Layout */
+            --container-max-width: 800px;
+            --section-padding: clamp(3rem, 8vw, 6rem);
+            --content-padding: clamp(1rem, 5vw, 2rem);
+
+            /* Bordas e Sombras */
+            --radius-main: 16px;
+            --glass-bg: rgba(25, 12, 16, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px var(--accent-glow);
+        }
+
+        /* RESET GERAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Previne scroll horizontal */
+            min-height: 100vh;
+        }
+
+        /* BACKGROUND GRADIENTE E CANVAS */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #200b12 0%, var(--bg-color) 80%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .app-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--content-padding);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section {
+            width: 100%;
+            padding: var(--section-padding) 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 1. HERO SECTION */
+        .hero-section {
+            min-height: 100vh;
+            justify-content: center;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .hero-title {
+            font-family: var(--font-title);
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 700;
+            background: linear-gradient(to right, var(--text-main), var(--accent-rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 3rem;
+        }
+
+        /* ANIMAÇÃO CORAÇÃO */
+        .pulsing-heart {
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            animation: pulse 1.5s infinite;
+            filter: drop-shadow(0 0 15px var(--accent-glow));
+        }
+
+        .pulsing-heart.small {
+            font-size: 1.2rem;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 4px;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.15);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 2. SPOTIFY SECTION */
+        .spotify-container {
+            width: 100%;
+            max-width: 500px;
+            /* Largura máxima requisitada */
+            margin: 0 auto;
+            border-radius: var(--radius-main);
+            overflow: hidden;
+            box-shadow: var(--shadow-glow);
+            transition: transform 0.3s ease;
+        }
+
+        .spotify-container:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 3. DECLARATION SECTION */
+        .declaration-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-main);
+            padding: clamp(2rem, 6vw, 4rem);
+            width: 100%;
+            max-width: 600px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+        }
+
+        .declaration-text {
+            font-family: var(--font-title);
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            color: var(--text-main);
+            font-style: italic;
+            line-height: 1.8;
+            margin: 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .quote-mark {
+            font-family: var(--font-title);
+            font-size: clamp(3rem, 8vw, 4rem);
+            color: var(--accent-wine);
+            opacity: 0.5;
+            position: absolute;
+            line-height: 1;
+        }
+
+        .quote-mark.top {
+            top: 1rem;
+            left: 1.5rem;
+        }
+
+        .quote-mark.bottom {
+            bottom: 0rem;
+            right: 1.5rem;
+        }
+
+        /* 4. CONTADOR SECTION */
+        .counter-intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .counter-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(1rem, 3vw, 2rem);
+            width: 100%;
+        }
+
+        .counter-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            min-width: 100px;
+            flex: 1 1 auto;
+            max-width: calc(50% - 1rem);
+            /* 2 colunas no mobile por padrão */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .counter-number {
+            font-family: var(--font-title);
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            color: var(--accent-rose);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(214, 135, 152, 0.3);
+        }
+
+        .counter-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        /* 5. GALLERY SECTION */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(1rem, 3vw, 2rem);
+            width: 100%;
+            max-width: 600px;
+            /* Mantém o grid contido no desktop */
+        }
+
+        .gallery-item {
+            border-radius: var(--radius-main);
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.05);
+            /* Placeholder de carregamento */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* 6. FOOTER */
+        .footer {
+            width: 100%;
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            opacity: 0.8;
+        }
+
+        /* ANIMAÇÕES DE SCROLL (FADE IN + SLIDE UP) */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVIDADE (MEDIA QUERIES) */
+        @media (min-width: 481px) {
+            .counter-item {
+                min-width: 120px;
+                max-width: unset;
+                /* Permite itens crescerem além de 50% */
+            }
+        }
+
+        @media (min-width: 768px) {
+            .counter-grid {
+                flex-wrap: nowrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="section hero-section fade-in">
+            <h1 class="hero-title" id="couple-name">Victor & Kamily</h1>
+            <p class="hero-subtitle" id="couple-date">Juntos desde 24 de Agosto de 2025</p>
+            <div class="pulsing-heart">❤️</div>
+        </section>
+
+        <!-- 2. SEÇÃO DE MÚSICA (Spotify) -->
+        <section id="music" class="section fade-in">
+            <h2 class="section-title">Nossa música 🎵</h2>
+            <div class="spotify-container">
+                <iframe data-testid="embed-iframe" style="border-radius:12px"
+                    src="https://open.spotify.com/embed/track/0zLs0xjw4MYcMiXHsOvSgk?utm_source=generator" width="100%"
+                    height="152" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- 3. SEÇÃO DE DECLARAÇÃO -->
+        <section id="declaration" class="section fade-in">
+            <h2 class="section-title">Minha declaração ❤️</h2>
+            <div class="declaration-card">
+                <span class="quote-mark top">❝</span>
+                <p class="declaration-text" id="declaration-message">
+                    Você mudou tudo, como eu me sinto e vejo o mundo.
+                    me faz mais amável e mais feliz.
+                    Te quero demais, todos os dias. Obrigado! ❤️</p>
+                <span class="quote-mark bottom">❞</span>
+            </div>
+        </section>
+
+        <!-- 4. CONTADOR DE TEMPO JUNTOS -->
+        <section id="counter" class="section fade-in">
+            <h2 class="section-title">Nosso tempo</h2>
+            <p class="counter-intro">Estamos juntos há</p>
+            <div class="counter-grid">
+                <div class="counter-item">
+                    <span class="counter-number" id="count-days">00</span>
+                    <span class="counter-label">Dias</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" id="count-hours">00</span>
+                    <span class="counter-label">Horas</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" id="count-minutes">00</span>
+                    <span class="counter-label">Minutos</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" id="count-seconds">00</span>
+                    <span class="counter-label">Segundos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. GALERIA DE MOMENTOS -->
+        <section id="gallery" class="section fade-in">
+            <h2 class="section-title">Nossos momentos 📸</h2>
+            <div class="gallery-grid">
+                <!-- Imagens 4:5 proporção -->
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/400/500?random=1" alt="Nosso momento 1" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/400/500?random=2" alt="Nosso momento 2" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/400/500?random=3" alt="Nosso momento 3" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/400/500?random=4" alt="Nosso momento 4" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. RODAPÉ -->
+        <footer class="footer fade-in">
+            <p class="footer-text"><i>Feito com <span class="pulsing-heart small">❤️</span> especialmente para você</i>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // ---------------------------------------------------------
+        // 1. CONFIGURAÇÕES PRINCIPAIS (Fácil personalização)
+        // ---------------------------------------------------------
+        const CONFIG = {
+            startDate: '2025-08-24T23:00:00-03:00', // Data inicial
+        };
+
+        // ---------------------------------------------------------
+        // 2. CONTADOR DE TEMPO JUNTOS
+        // ---------------------------------------------------------
+        function updateCounter() {
+            const startDate = new Date(CONFIG.startDate).getTime();
+            const now = new Date().getTime();
+
+            // Calcula a diferença em milissegundos
+            let diff = now - startDate;
+
+            // Se a data for no futuro, zera o contador
+            if (diff < 0) {
+                diff = 0;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('count-days').innerText = String(days).padStart(2, '0');
+            document.getElementById('count-hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('count-minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('count-seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        // Atualiza a cada segundo
+        setInterval(updateCounter, 1000);
+        updateCounter(); // Chamada inicial
+
+        // ---------------------------------------------------------
+        // 3. ANIMAÇÕES DE SCROLL (Intersection Observer)
+        // ---------------------------------------------------------
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 // Dispara quando 15% do elemento estiver visível
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Opcional: Descomente a linha abaixo para animar apenas uma vez
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ---------------------------------------------------------
+        // 4. BACKGROUND CANVAS (Partículas / Corações)
+        // ---------------------------------------------------------
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2 + 1; // Tamanho entre 1 e 3
+                this.speedY = Math.random() * 0.5 + 0.2; // Velocidade subindo
+                this.speedX = (Math.random() - 0.5) * 0.5; // Leve movimento lateral
+                this.opacity = Math.random() * 0.5 + 0.1;
+                // Cores da paleta (rosa suave a vinho)
+                const colors = ['rgba(214, 135, 152, ', 'rgba(230, 197, 204, ', 'rgba(114, 22, 38, '];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+
+                // Reposiciona no fundo quando sai da tela por cima
+                if (this.y < -10) {
+                    this.y = height + 10;
+                    this.x = Math.random() * width;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color + this.opacity + ')';
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            // Ajusta quantidade baseada no tamanho da tela
+            const count = Math.floor((width * height) / 15000);
+            particles = [];
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+
+        // Reinicia partículas se redimensionar muito
+        window.addEventListener('resize', () => {
+            setTimeout(initParticles, 200);
+        });
+    </script>
+</body>
+
+</html>
